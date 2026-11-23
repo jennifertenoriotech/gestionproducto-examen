@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Administrar productos | Gestión de Productos</title>
+  <link rel="stylesheet" href="/css/styles.css" />
+  <script src="/js/admin.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Ir al contenido</a>
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="/" aria-label="Gestión de Productos, inicio">
+        <span class="brand-mark" aria-hidden="true">◇</span>
+        <span>Gestión de Productos</span>
+      </a>
+      <nav class="main-nav" aria-label="Navegación principal">
+        <a class="nav-link" href="/">Catálogo</a>
+        <a class="nav-link active" href="/admin.html" aria-current="page">Administrar productos</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="contenido" class="page-shell admin-page">
+    <section class="admin-intro">
+      <div>
+        <span class="eyebrow">Panel de gestión</span>
+        <h1>Administrar productos</h1>
+        <p>Organiza tu catálogo: crea, consulta, edita y elimina productos.</p>
+      </div>
+      <a class="button button-outline" href="/">Ver catálogo <span aria-hidden="true">↗</span></a>
+    </section>
+
+    <p id="admin-message" class="feedback" role="status" aria-live="polite"></p>
+
+    <div class="admin-layout">
+      <section class="panel inventory-panel" aria-labelledby="inventory-title">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">Inventario</span>
+            <h2 id="inventory-title">Productos registrados</h2>
+            <p id="inventory-count" class="muted">Cargando productos...</p>
+          </div>
+          <button id="new-product" class="button button-primary" type="button">+ Nuevo producto</button>
+        </div>
+        <label class="search-field admin-search">
+          <span class="search-icon" aria-hidden="true">⌕</span>
+          <span class="sr-only">Buscar en inventario</span>
+          <input id="admin-search" type="search" placeholder="Buscar por nombre o categoría..." autocomplete="off" />
+        </label>
+        <div class="table-scroll">
+          <table class="product-table">
+            <thead><tr><th scope="col">Producto</th><th scope="col">Precio</th><th scope="col">Stock</th><th scope="col">Categoría</th><th scope="col">Acciones</th></tr></thead>
+            <tbody id="product-rows"></tbody>
+          </table>
+        </div>
+        <p id="inventory-empty" class="empty-table" hidden>No hay productos para mostrar.</p>
+      </section>
+
+      <section id="form-panel" class="panel editor-panel" aria-labelledby="form-title">
+        <div class="panel-header">
+          <div>
+            <span class="eyebrow">Formulario</span>
+            <h2 id="form-title">Nuevo producto</h2>
+            <p id="form-subtitle" class="muted">Completa los datos para agregarlo al catálogo.</p>
+          </div>
+        </div>
+        <form id="product-form" novalidate>
+          <div class="form-grid">
+            <label class="field full-width">Nombre <span aria-hidden="true">*</span>
+              <input name="nombre" type="text" maxlength="120" required placeholder="Ej. Audífonos inalámbricos" />
+            </label>
+            <label class="field full-width">Descripción <span aria-hidden="true">*</span>
+              <textarea name="descripcion" rows="3" maxlength="1000" required placeholder="Describe el producto"></textarea>
+            </label>
+            <label class="field">Precio <span aria-hidden="true">*</span>
+              <input name="precio" type="number" min="0" step="0.01" required placeholder="0.00" />
+            </label>
+            <label class="field">Stock <span aria-hidden="true">*</span>
+              <input name="stock" type="number" min="0" step="1" required placeholder="0" />
+            </label>
+            <label class="field">Categoría <span aria-hidden="true">*</span>
+              <input name="categoria" type="text" maxlength="60" required placeholder="Ej. Tecnología" />
+            </label>
+            <label class="field">Estado <span aria-hidden="true">*</span>
+              <select name="estado" required>
+                <option value="Disponible">Disponible</option>
+                <option value="Agotado">Agotado</option>
+                <option value="Descontinuado">Descontinuado</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="upload-block">
+            <span class="field-label">Imagen del producto</span>
+            <label class="upload-zone" for="product-image">
+              <span id="image-preview" class="image-preview"><span class="upload-symbol" aria-hidden="true">↑</span></span>
+              <span class="upload-copy"><strong>Seleccionar imagen</strong><small>JPG, PNG o WEBP · hasta 5 MB</small></span>
+            </label>
+            <input id="product-image" name="imagen" class="sr-only" type="file" accept="image/jpeg,image/png,image/webp" />
+            <button id="remove-image" class="text-button" type="button" hidden>Quitar imagen actual</button>
+          </div>
+
+          <div class="form-actions">
+            <button id="submit-product" class="button button-primary" type="submit">Guardar producto</button>
+            <button id="cancel-edit" class="button button-outline" type="button" hidden>Cancelar edición</button>
+          </div>
+        </form>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><span>Gestión de Productos</span><span>Panel de administración</span></footer>
+</body>
+</html>
